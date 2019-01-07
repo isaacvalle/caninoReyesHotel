@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Municipality extends Migration
+class CreateServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class Municipality extends Migration
      */
     public function up()
     {
-        Schema::create('municipalities', function (Blueprint $table) {
-            $table->smallIncrements('id');
+        Schema::create('services', function (Blueprint $table) {
+            $table->tinyIncrements('id');
             $table->string('name');
+            $table->boolean('status');
+            $table->string('description');
+            $table->string('price');
+            $table->string('discount');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +31,6 @@ class Municipality extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('municipalities');
+        Schema::dropIfExists('services');
     }
 }

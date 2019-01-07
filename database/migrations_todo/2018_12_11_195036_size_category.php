@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Locality extends Migration
+class SizeCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class Locality extends Migration
      */
     public function up()
     {
-        Schema::create('localities', function (Blueprint $table) {
-            $table->smallIncrements('id');
+        Schema::create('size_categories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->tinyIncrements('id');
             $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class Locality extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('localities');
+        Schema::dropIfExists('size_categories');
     }
 }

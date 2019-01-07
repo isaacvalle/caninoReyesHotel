@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class RegisterController extends Controller
 {
@@ -46,12 +48,17 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator($data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'mother_last_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:15'],
+            'mobile' => ['required', 'string', 'max:15'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'picture' => ['url'],
         ]);
     }
 
@@ -61,12 +68,57 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create($data)
     {
-        return User::create([
+
+        $validator = $this->validator($data);
+
+         if ($validator->fails()) {
+            return Response::json(array(
+                'message' => 'Could not create new user.',
+                'errors' => $validator->errors(),
+                'status_code' => 400,
+                'ok' => false
+            ), 400);
+        }
+
+        $data = User::create([
             'name' => $data['name'],
+            'last_name' => $data['last_name'],
+            'mother_last_name' => $data['mother_last_name'],
+            'phone' => $data['phone'],
+            'mobile' => $data['mobile'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
+            'picture' => $data['picture']
         ]);
+
+        if ($data) {
+            /*return Response::json([
+                'message' => 'The resource has been created successfully.',
+                'status_code' => 200,
+                'ok' => true
+            ], 200);*/
+            return $data;
+         } else {
+            return Response::json(array(
+                'message' => 'Could not create new user.',
+                'status_code' => 500,
+                'ok' => false
+            ), 500);
+         }
     }
+
+    /**
+     * Log in a user.
+     *
+     * @param  Request  $request
+     * @param  User  $user
+     * @return json
+     */
+    /*protected function registered(Request $request, User $user) {
+        $user->generateToken();
+
+        return response()->json(['data' => $user->toArray()], 201);
+    }*/
 }

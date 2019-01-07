@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Street extends Migration
+class CreateRoomCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class Street extends Migration
      */
     public function up()
     {
-        Schema::create('streets', function (Blueprint $table) {
-            $table->mediumIncrements('id');
-            $table->string('name');
+        Schema::create('room_categories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->tinyIncrements('id');
+            $table->string('category');
+            $table->string('description');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +29,6 @@ class Street extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('streets');
+        Schema::dropIfExists('room_categories');
     }
 }

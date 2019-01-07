@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ZealHistory extends Migration
+class Street extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class ZealHistory extends Migration
      */
     public function up()
     {
-        Schema::create('zealHistories', function (Blueprint $table) {
+        Schema::create('streets', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->mediumIncrements('id');
-            $table->date('date');
-            $table->string('observations');
-            $table->unsignedMediumInteger('dogId');
-            $table->foreign('dogId')->references('id')->on('dogs');
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +28,6 @@ class ZealHistory extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('zealHistories');
+        Schema::dropIfExists('streets');
     }
 }

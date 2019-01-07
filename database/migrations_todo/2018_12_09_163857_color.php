@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Breed extends Migration
+class Color extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class Breed extends Migration
      */
     public function up()
     {
-          Schema::create('breeds', function (Blueprint $table) {
+        Schema::create('colors', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->tinyIncrements('id');
-            $table->string('name');
+            $table->string('color');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class Breed extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('breeds');
+        Schema::dropIfExists('colors');
     }
 }

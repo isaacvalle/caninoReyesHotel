@@ -13,12 +13,17 @@ class WeightHistory extends Migration
      */
     public function up()
     {
-        Schema::create('weightHistories', function (Blueprint $table) {
+        Schema::create('weight_histories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->mediumIncrements('id');
             $table->date('date');
             $table->tinyInteger('weight');
-            $table->unsignedMediumInteger('dogId');
-            $table->foreign('dogId')->references('id')->on('dogs');
+            $table->unsignedMediumInteger('dog_id');
+            $table->timestamps();
+            
+            $table->foreign('dog_id')
+                  ->references('id')
+                  ->on('dogs');
         });
     }
 
@@ -29,6 +34,6 @@ class WeightHistory extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('weightHistories');
+        Schema::dropIfExists('weight_histories');
     }
 }

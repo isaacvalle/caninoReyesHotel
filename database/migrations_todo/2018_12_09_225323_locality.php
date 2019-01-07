@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class State extends Migration
+class Locality extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class State extends Migration
      */
     public function up()
     {
-        Schema::create('states', function (Blueprint $table) {
-            $table->tinyIncrements('id');
+        Schema::create('localities', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->smallIncrements('id');
             $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class State extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('states');
+        Schema::dropIfExists('localities');
     }
 }

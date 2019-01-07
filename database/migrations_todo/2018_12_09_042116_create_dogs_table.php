@@ -14,29 +14,32 @@ class CreateDogsTable extends Migration
     public function up()
     {
         Schema::create('dogs', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->mediumIncrements('id');
             $table->string('name', 100);
-            $table->unsignedTinyInteger('breedId');
+            $table->unsignedTinyInteger('breed_id');
             $table->binary('gender');
             $table->string('picture', 200)->nullable();
             $table->date('dob');
-            $table->unsignedTinyInteger('colorId');
-            $table->unsignedTinyInteger('spotsColorId');
-            $table->tinyInteger('size');
+            $table->unsignedTinyInteger('color_id');
+            $table->unsignedTinyInteger('spots_color_id')->nullable();
+            $table->unsignedTinyInteger('size_id');
             $table->tinyInteger('weight')->nullable();
             $table->binary('sterialized');
-            $table->date('lastZeal')->nullable();
-            $table->binary('specialCare')->nullable();
-            $table->text('descSpecialCare', 150)->nullable();
+            $table->date('last_zeal')->nullable();
+            $table->binary('special_care')->nullable();
+            $table->text('desc_special_care', 150)->nullable();
             $table->binary('status');
-            $table->time('lunchTime');
+            $table->time('lunch_time');
             $table->binary('friendly');
             $table->text('observations')->nullable();
-            $table->unsignedMediumInteger('userId');
-            $table->foreign('userId')->references('id')->on('users');
-            $table->foreign('breedId')->references('id')->on('breeds');
-            $table->foreign('colorId')->references('id')->on('colors');
-            $table->foreign('spotsColorId')->nullable()->references('id')->on('colors');
+            $table->unsignedMediumInteger('user_id');
+            
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('breed_id')->references('id')->on('breeds');
+            $table->foreign('color_id')->references('id')->on('colors');
+            $table->foreign('spots_color_id')->references('id')->on('colors');
+            $table->foreign('size_id')->references('id')->on('size_categories');
             $table->timestamps();
         });
     }
