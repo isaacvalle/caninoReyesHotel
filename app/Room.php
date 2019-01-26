@@ -28,10 +28,16 @@ class Room extends Model
     ];
 
     /**
+     * Get the rooms by cetegory.
+     */
+    public function categories() {
+        return $this->hasMany('App\RoomCategory', 'id', 'category_id');
+    }
+
+    /**
      * Get the dogs for the breed.
      */
     public function reservations() {
     	return $this->hasMany('App\Reservation', 'id', 'id');
     }
-
 }

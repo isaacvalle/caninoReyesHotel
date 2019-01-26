@@ -59,7 +59,7 @@ class DogController extends Controller
 
         if (Dog::create($dog)) {
             return Response::json([
-                'message' => 'The resource is created successfully',
+                'message' => 'The resource has been created successfully',
                 'status_code' => 200,
                 'ok' => true
             ], 200);

@@ -93,6 +93,8 @@ class RegisterController extends Controller
             'picture' => $data['picture']
         ]);
 
+        $data->assignRole($data['role']);
+
         if ($data) {
             /*return Response::json([
                 'message' => 'The resource has been created successfully.',

@@ -23,8 +23,10 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::post('dogs', 'DogController@store');
 	Route::put('dogs/{id}', 'DogController@update');
 	Route::delete('dogs/{id}', 'DogController@destroy');
+	Route::post('reservations', 'ReservationController@store');
+	Route::post('roles', 'RoleController@store');
+	Route::post('permissions', 'PermissionController@store');
 });
-
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');

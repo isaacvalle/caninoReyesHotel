@@ -52,6 +52,6 @@ class Reservation extends Model
      * Get the dog breed.
      */
     public function room(){
-        return $this->hasOne('App\Breed', 'id', 'room_id');
+        return $this->hasOne('App\Room', 'id', 'room_id');
     }
 }

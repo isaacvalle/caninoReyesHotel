@@ -168,6 +168,11 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
 
         /*
+         * Package to manage roles and permissions
+         */
+        Spatie\Permission\PermissionServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
