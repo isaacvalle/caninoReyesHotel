@@ -68,6 +68,7 @@ class ReservationController extends Controller
                             }
                         }
                         break;
+                    case Config::get('hcrConfig.services.shower'):
                     case Config::get('hcrConfig.services.roundHomeService'):
                     case Config::get('hcrConfig.services.simpleHomeService'):
                         Log::info('Home service - starts');
@@ -154,7 +155,9 @@ class ReservationController extends Controller
             Log::info('Room assigned: '.$reservation['room_id']);
         } elseif ($service == Config::get('hcrConfig.services.roundHomeService') || $service == Config::get('hcrConfig.services.simpleHomeService')) {
             $user_locality = $this->get_user_locality($reservation['user_id']);
-        }                           
+        } elseif ($service == Config::get('hcrConfig.services.shower')) {
+
+        }                         
         
         $reservation = $this->set_service($reservation, $service, $dog->size->name, $user_locality);
 
