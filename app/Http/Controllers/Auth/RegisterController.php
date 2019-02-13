@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -66,11 +65,10 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Model\User
      */
     protected function create($data)
     {
-
         $validator = $this->validator($data);
 
          if ($validator->fails()) {
@@ -93,22 +91,24 @@ class RegisterController extends Controller
             'picture' => $data['picture']
         ]);
 
-        $data->assignRole($data['role']);
+        //$data->assignRole($data['role']);
 
-        if ($data) {
-            /*return Response::json([
-                'message' => 'The resource has been created successfully.',
-                'status_code' => 200,
-                'ok' => true
-            ], 200);*/
-            return $data;
+        return $data;
+
+        /*if ($data) {
+            //return Response::json([
+            //    'message' => 'The resource has been created successfully.',
+            //    'status_code' => 200,
+            //    'ok' => true
+            //], 200);
+            
          } else {
             return Response::json(array(
                 'message' => 'Could not create new user.',
                 'status_code' => 500,
                 'ok' => false
             ), 500);
-         }
+         }*/
     }
 
     /**

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Municipality;
+use App\Models\Municipality;
 class MunicipalitiesTableSeeder extends Seeder
 {
     /**

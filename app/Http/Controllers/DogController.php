@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Log;
 
-use App\Dog;
+use App\Models\Dog;
 /**
  * @description  This class is the API entry point, this handle all services
  *               related to 'dogs' like insert a new dog, index dogs or

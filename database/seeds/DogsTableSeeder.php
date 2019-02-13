@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Dog;
+use App\Models\Dog;
 class DogsTableSeeder extends Seeder
 {
     /**

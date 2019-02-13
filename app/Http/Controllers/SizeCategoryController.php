@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\SizeCategory;
+use App\Models\SizeCategory;
 use Illuminate\Http\Request;
 
 class SizeCategoryController extends Controller

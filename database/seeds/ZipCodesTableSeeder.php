@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\ZipCode;
+use App\Models\ZipCode;
 class ZipCodesTableSeeder extends Seeder
 {
     /**

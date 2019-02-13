@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Street;
+use App\Models\Street;
 class StreetsTableSeeder extends Seeder
 {
     /**

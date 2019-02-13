@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Room;
+use App\Models\Room;
 class RoomSeeder extends Seeder
 {
     /**

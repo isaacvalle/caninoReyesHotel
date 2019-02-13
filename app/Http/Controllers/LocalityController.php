@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Locality;
+use App\Models\Locality;
 use Illuminate\Http\Request;
 
 class LocalityController extends Controller

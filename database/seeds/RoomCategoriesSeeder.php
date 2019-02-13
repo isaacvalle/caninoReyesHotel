@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\RoomCategory;
+use App\Models\RoomCategory;
 class RoomCategoriesSeeder extends Seeder
 {
     /**

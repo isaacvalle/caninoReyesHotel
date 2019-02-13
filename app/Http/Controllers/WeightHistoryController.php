@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\WeightHistory;
 use Illuminate\Http\Request;
 
-use App\WeightHistory;
+use App\Models\WeightHistory;
 class WeightHistoryController extends Controller
 {
     /**

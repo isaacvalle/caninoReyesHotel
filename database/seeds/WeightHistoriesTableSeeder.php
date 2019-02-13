@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\WeightHistory;
+use App\Models\WeightHistory;
 class WeightHistoriesTableSeeder extends Seeder
 {
     /**

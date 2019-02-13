@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Address;
+use App\Models\Address;
 class AddressesTableSeeder extends Seeder
 {
     /**

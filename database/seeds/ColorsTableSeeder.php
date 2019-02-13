@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Color;
+use App\Models\Color;
 class ColorsTableSeeder extends Seeder
 {
     /**

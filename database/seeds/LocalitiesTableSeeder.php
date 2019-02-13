@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Locality;
+use App\Models\Locality;
 class LocalitiesTableSeeder extends Seeder
 {
     /**

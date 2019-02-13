@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Service;
+use App\Models\Service;
 class ServicesSeeder extends Seeder
 {
     /**

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\ZealHistory;
+use App\Models\ZealHistory;
 use Illuminate\Http\Request;
 
-use App\ZealHistory;
 class ZealHistoryController extends Controller
 {
     /**

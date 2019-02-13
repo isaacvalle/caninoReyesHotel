@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\SizeCategory;
+use App\Models\SizeCategory;
 class SizeCategoriesTableSeeder extends Seeder
 {
     /**

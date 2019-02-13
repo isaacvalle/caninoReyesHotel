@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\ReservationStatus;
+use App\Models\ReservationStatus;
 class ReservationStatusesSeeder extends Seeder
 {
     /**

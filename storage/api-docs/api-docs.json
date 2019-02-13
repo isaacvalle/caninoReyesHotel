@@ -1,0 +1,88 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Hotel Canino Reyes API",
+        "contact": {
+            "name": "Manuel Tapia",
+            "url": "https://google.com"
+        },
+        "version": "0.1"
+    },
+    "paths": {
+        "api/reservations": {
+            "get": {
+                "summary": "Get reservation from user",
+                "operationId": "App\\Http\\Controllers\\ReservationController::index",
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add a new reservation to the hotel",
+                "operationId": "App\\Http\\Controllers\\ReservationController::store",
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/api/reservations/{reservation_id}": {
+            "get": {
+                "summary": "Get specific reservation",
+                "operationId": "App\\Http\\Controllers\\ReservationController::show",
+                "parameters": [
+                    {
+                        "name": "reservation_id",
+                        "in": "path",
+                        "description": "ID of Reservation to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Reservation"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Reservation": {
+                "title": "Reservation model",
+                "description": "Reservation model"
+            }
+        },
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "flows": {
+                    "password": {
+                        "tokenUrl": "http://localhost:8000/oauth/token",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    }
+}
