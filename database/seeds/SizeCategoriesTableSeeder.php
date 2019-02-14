@@ -12,7 +12,7 @@ class SizeCategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        SizeCategory::truncate();
+        // SizeCategory::truncate();
 
         SizeCategory::create([
         	'name' => 'Mini',

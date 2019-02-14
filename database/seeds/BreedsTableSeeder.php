@@ -12,9 +12,9 @@ class BreedsTableSeeder extends Seeder
      */
     public function run()
     {
-        Breed::truncate();
+        // Breed::truncate();
 
-        $faker = \Faker\Factory::create();   
+        $faker = \Faker\Factory::create();
 
         //iteration to create 20 fake records
         for ($i = 0; $i < 20; $i++) {

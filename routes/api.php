@@ -18,10 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 })->middleware('verified');
 
 Route::group(['middleware' => 'auth:api'], function() {
-	Route::get('dogs', 'DogController@index');	
+	Route::get('dogs', 'DogController@index')->middleware('verified');	
 	Route::post('dogs', 'DogController@store');
 	Route::get('dogs/{id}', 'DogController@show');
-	Route::put('dogs/{id}', 'DogController@update');	
+	Route::put('dogs/{id}', 'DogController@update');
 	Route::post('reservations', 'ReservationController@store');
 	Route::get('reservations/{id}', 'ReservationController@show');
     Route::put('reservations/{id}', 'ReservationController@update');
@@ -39,4 +39,3 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
-

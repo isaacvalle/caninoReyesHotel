@@ -12,9 +12,9 @@ class StreetsTableSeeder extends Seeder
      */
     public function run()
     {
-        Street::truncate();
+        // Street::truncate();
 
-        $faker = \Faker\Factory::create();   
+        $faker = \Faker\Factory::create();
 
         //iteration to create 30 fake records
         for ($i = 0; $i < 30; $i++) {

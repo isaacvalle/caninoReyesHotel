@@ -12,8 +12,8 @@ class RoomCategoriesSeeder extends Seeder
      */
     public function run()
     {
-        RoomCategory::truncate();  
-        
+        // RoomCategory::truncate();  
+
         RoomCategory::create([
         	'category' => 'xs',
         	'description' => 'to mini dogs'
@@ -37,6 +37,6 @@ class RoomCategoriesSeeder extends Seeder
         RoomCategory::create([
         	'category' => 'xt',
         	'description' => 'to extra tall dogs'
-        ]);        
+        ]);
     }
 }

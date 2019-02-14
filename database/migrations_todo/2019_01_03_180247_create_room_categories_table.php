@@ -17,7 +17,7 @@ class CreateRoomCategoriesTable extends Migration
             $table->engine = 'InnoDB';
             $table->tinyIncrements('id');
             $table->string('category');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }

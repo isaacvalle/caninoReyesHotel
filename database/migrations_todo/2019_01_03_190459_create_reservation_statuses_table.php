@@ -17,7 +17,7 @@ class CreateReservationStatusesTable extends Migration
             $table->engine = 'InnoDB';
             $table->tinyIncrements('id');
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }

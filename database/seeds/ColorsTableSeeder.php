@@ -12,9 +12,9 @@ class ColorsTableSeeder extends Seeder
      */
     public function run()
     {
-        Color::truncate();
+        // Color::truncate();
 
-        $faker = \Faker\Factory::create();   
+        $faker = \Faker\Factory::create();
 
         //iteration to create 15 fake records
         for ($i = 0; $i < 15; $i++) {
