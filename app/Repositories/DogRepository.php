@@ -85,7 +85,8 @@ class DogRepository
     public function show($dog_id)
     {
         try {
-            $dog = Dog::find($dog_id)->with('breed:id,name')->get();
+            $dog = Dog::with('breed:id,name')->find($dog_id);
+            Log::debug('Dog: ' . $dog);
             if ($dog){
                 $this->response->setOk(true);
                 $this->response->setMessage('Operation success. Dog gotten.');
