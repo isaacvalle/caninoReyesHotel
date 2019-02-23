@@ -9,6 +9,7 @@
 namespace App\Service;
 
 use App\Helpers\UserValidator;
+use App\Models\Response;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Log;
 
@@ -75,5 +76,25 @@ class UserService
             return $municipality;
         }
         return $municipality;
+    }
+
+    /**
+     * Function which register a user, this function validate if user who is requesting has
+     * admin role.
+     *
+     * @param array $request
+     * @param $user_id
+     * @return Response
+     */
+    public function register(array $request, $user_id)
+    {
+        Log::info('Service - Starting validations to create new user.');
+        $validator = $this->userValidator->create($user_id);
+
+        if ($validator->getOk()) {
+            return $this->userRepository->create($request);
+        } else {
+            return $validator;
+        }
     }
 }

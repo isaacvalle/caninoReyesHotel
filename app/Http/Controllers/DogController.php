@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreDog;
+use App\Service\DogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
@@ -19,110 +21,77 @@ use App\Models\Dog;
  */
 class DogController extends Controller
 {
+    /** @var $dogService */
+    private $dogService;
+
+    /**
+     * DogController constructor.
+     * @param DogService $dogService
+     */
+    public function __construct(DogService $dogService)
+    {
+        $this->dogService = $dogService;
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        //to paginate the results uncomment next line
+        //to paginate the results
         //$dog = Dog::paginate(9);
-        
-        $dog = Dog::with('breed:id,name')->get();    
-       
-        return Response::json(array(
-            'data' => $dog->toArray(),
-            'status_code' => 200,
-            'ok' => true
-        ), 200);        
+
+        Log::info('Controller - dog index endpoint has been called.');
+        $response = $this->dogService->index($request->user()->id);
+
+        return Response::json([
+            'message' => $response->getMessage(),
+            'data' => $response->getData(),
+            'status_code' => $response->getStatusCode(),
+            'ok' => $response->getOk()
+        ], $response->getStatusCode());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreDog $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(StoreDog $request)
     {
-        $dog = $request->all();
-        $validator = $this->validator_create($dog);
-        if ($validator->fails()) {
-            return Response::json(array(
-                'message' => 'Could not create new dog.',
-                'errors' => $validator->errors(),
-                'status_code' => 400,
-                'ok' => false
-            ), 400);
-        }
+        Log::info('Controller - dog store endpoint has been called.');
+        $response = $this->dogService->store($request->all(), $request->user()->id);
 
-        if (Dog::create($dog)) {
-            return Response::json([
-                'message' => 'The resource has been created successfully',
-                'status_code' => 200,
-                'ok' => true
-            ], 200);
-        } else {
-            return Response::json(array(
-                'message' => 'Could not create new dog.',
-                'status_code' => 500,
-                'ok' => false
-            ), 500);
-        }
-    }
-
-    /**
-     * Function to validate input dog object. 
-     *
-     * @param type $data
-     * @return type
-     */
-    private function validator_create($data){
-            
-        return Validator::make($data, [
-            'name' => 'bail|required|string|min:3|max:100',
-            'breed_id' => 'bail|required|numeric',
-            'gender' => 'bail|required|boolean',
-            'picture' => 'url',
-            'dob' => 'required|date_format:Y-m-d',
-            'color_id' => 'bail|required|numeric',
-            'spots_color_id' => 'numeric',
-            'size_id' => 'bail|required|numeric',
-            'sterialized' => 'required|boolean',
-            'status' => 'required|boolean',
-            'lunch_time' => 'bail|required|date_format:H:i',
-            'friendly' => 'bail|required|boolean',
-            'observations' => 'bail|string|min:5|max:255',
-            'user_id' => 'bail|required|numeric'
-        ]);
+        return Response::json([
+            'message' => $response->getMessage(),
+            'data' => $response->getData(),
+            'status_code' => $response->getStatusCode(),
+            'ok' => $response->getOk()
+        ], $response->getStatusCode());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $dog_id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(Request $request, $dog_id)
     {
-        $dog = null;
+        Log::info('Controller - dog store endpoint has been called.');
+        $response = $this->dogService->show($request->user()->id, $dog_id);
 
-        $dog = Dog::find($id);
-
-        if (!$dog) {
-            return Response::json(array(
-                'message' => 'Could not find this (' . $id . ') puppy :(',
-                'status_code' => 404,
-                'ok' => false
-            ), 404);
-        }
-
-        return Response::json(array(
-            'data' => $dog->toArray(),
-            'status_code' => 200,
-            'ok' => true
-        ), 200);
+        return Response::json([
+            'message' => $response->getMessage(),
+            'data' => $response->getData(),
+            'status_code' => $response->getStatusCode(),
+            'ok' => $response->getOk()
+        ], $response->getStatusCode());
     }
 
     /**

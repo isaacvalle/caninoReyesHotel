@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Log;
  * @author Ing. Manuel Tapia <@manuel_30749@gmail.com>
  * @since  2019/01
  */
-
 class ReservationController extends Controller
 {
     /** @var ReservationService */

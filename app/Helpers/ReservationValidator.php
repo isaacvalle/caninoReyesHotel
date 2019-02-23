@@ -114,7 +114,7 @@ class ReservationValidator
 
     /**
      * Service to create a new reservation, after validate data input in Request class
-     * Controller pass the Request to this tie, here are applied some business rules.
+     * Controller pass the Request to this tier, here are applied some business rules.
      *
      * @param array $reservation
      * @param int $user_id

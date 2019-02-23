@@ -68,10 +68,14 @@ class ReservationService
         $user = $this->userService->get_by_id($user_id)->getData();
         $response = new Response();
 
+        $reservations = null;
         if ($user->hasRole('admin')) {
-            $reservations = Reservation::with('dog:id,name')->with('service:id,name')->get();
+            $reservations = Reservation::with('dog:id,name')->
+                                         with('service:id,name')->get();
         } else {
-            $reservations = Reservation::with('dog:id,name')->with('service:id,name')->where('user_id', '=', $user_id)->get();
+            $reservations = Reservation::with('dog:id,name')->
+                                         with('service:id,name')->
+                                         where('user_id', '=', $user_id)->get();
         }
 
         $response->setMessage('Reservations gotten.');
@@ -148,11 +152,16 @@ class ReservationService
 
         if ($user->hasRole('admin')) {
             $reservation = Reservation::find($reservation_id);
-
-            $response->setMessage('Reservation gotten.');
-            $response->setData($reservation->toArray());
-            $response->setStatusCode(200);
-            $response->setOk(true);
+            if($reservation) {
+                $response->setMessage('Reservation gotten.');
+                $response->setData($reservation->toArray());
+                $response->setStatusCode(200);
+                $response->setOk(true);
+            } else {
+                $response->setMessage('This reservation does not exits.');
+                $response->setStatusCode(404);
+                $response->setOk(true);
+            }
         } else {
             $reservation = Reservation::find($reservation_id);
             if ($reservation) {
@@ -172,7 +181,6 @@ class ReservationService
                 $response->setOk(true);
             }
         }
-
         return $response;
     }
 
