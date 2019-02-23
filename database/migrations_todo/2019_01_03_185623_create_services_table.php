@@ -17,7 +17,7 @@ class CreateServicesTable extends Migration
             $table->tinyIncrements('id');
             $table->string('name');
             $table->boolean('status');
-            $table->string('description');
+            $table->text('description');
             $table->string('price');
             $table->string('discount');
             $table->timestamps();

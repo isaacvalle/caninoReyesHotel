@@ -12,9 +12,9 @@ class StatesTableSeeder extends Seeder
      */
     public function run()
     {
-        State::truncate();
+        // State::truncate();
 
-        $faker = \Faker\Factory::create();   
+        $faker = \Faker\Factory::create();
 
         //iteration to create 10 fake records
         for ($i = 0; $i < 10; $i++) {

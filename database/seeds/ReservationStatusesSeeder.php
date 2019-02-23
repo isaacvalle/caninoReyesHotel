@@ -12,22 +12,22 @@ class ReservationStatusesSeeder extends Seeder
      */
     public function run()
     {
-    	ReservationStatus::truncate();
+    	// ReservationStatus::truncate();
 
     	ReservationStatus::create([
     		'name' => 'reserved',
     		'description' => 'just reserved waiting for the service'
-    	]);        
+    	]);
 
     	ReservationStatus::create([
     		'name' => 'in progress',
     		'description' => 'the service is currently in progress'
-    	]); 
+    	]);
 
     	ReservationStatus::create([
     		'name' => 'stopped',
     		'description' => 'the reservation has started but something went wgron so the reservation is waiting'
-    	]); 
+    	]);
 
     	ReservationStatus::create([
     		'name' => 'canceled',
@@ -37,6 +37,6 @@ class ReservationStatusesSeeder extends Seeder
     	ReservationStatus::create([
     		'name' => 'finished',
     		'description' => 'the reservation has end'
-    	]); 
+    	]);
     }
 }

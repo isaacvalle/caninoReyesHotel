@@ -12,7 +12,7 @@ class ServicesSeeder extends Seeder
      */
     public function run()
     {
-        Service::truncate();
+        // Service::truncate();
 
         Service::create([
         	'name' => 'hotel-xs',

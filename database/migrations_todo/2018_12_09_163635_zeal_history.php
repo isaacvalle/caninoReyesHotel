@@ -17,7 +17,7 @@ class ZealHistory extends Migration
             $table->engine = 'InnoDB';
             $table->mediumIncrements('id');
             $table->date('date');
-            $table->string('observations');
+            $table->text('observations');
             $table->unsignedMediumInteger('dog_id');
             $table->timestamps();
             $table->foreign('dog_id')->references('id')->on('dogs');
