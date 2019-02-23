@@ -61,6 +61,7 @@ class RegisterController extends Controller
         ]);
     }
 
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -71,7 +72,7 @@ class RegisterController extends Controller
     {
         $validator = $this->validator($data);
 
-         if ($validator->fails()) {
+        if ($validator->fails()) {
             return Response::json(array(
                 'message' => 'Could not create new user.',
                 'errors' => $validator->errors(),

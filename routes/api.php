@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
 	Route::delete('dogs/{id}', 'DogController@destroy');
 	Route::post('roles', 'RoleController@store');
 	Route::post('permissions', 'PermissionController@store');
+    Route::post('admin_register', 'UserController@register');
 });
 
 Route::post('register', 'Auth\RegisterController@register');

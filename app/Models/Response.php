@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Response extends Model
 {
-    private $message;
-    private $status_code;
-    private $data;
-    private $ok;
+    private $message; // String
+    private $status_code; //int
+    private $data; //array
+    private $ok; // bool
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+    }
 
     /**
      * @return mixed
