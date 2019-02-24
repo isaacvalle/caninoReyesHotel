@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDog;
+use App\Http\Requests\UpdateDog;
 use App\Service\DogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -97,18 +98,29 @@ class DogController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateDog $request
+     * @param $dog_id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDog $request, $dog_id)
     {
+
+        Log::info('Controller - dog update endpoint has been called.');
+        $response = $this->dogService->update($request->all(), $dog_id, $request->user()->id);
+
+        return Response::json([
+            'message' => $response->getMessage(),
+            'data' => $response->getData(),
+            'status_code' => $response->getStatusCode(),
+            'ok' => $response->getOk()
+        ], $response->getStatusCode());
+
         $dog = Dog::find($id);
         if (!$dog) {
             return Response::json(array(
                 'message' => 'Could not find this (' . $id . ') puppy :(',
                 'status_code' => 404,
-                'ok' => false 
+                'ok' => false
             ), 404);
         }
 
@@ -155,58 +167,6 @@ class DogController extends Controller
                 'ok' => false
             ), 500);
         }
-    }
-
-    /**
-     * Function to validate a update request dog.
-     *
-     * @param type $data
-     * @return type
-     */
-    private function validator_update($data){
-        
-        $rules = array();
-
-        if (array_key_exists('name', $data)){
-            $rules['name'] = 'string|min:3|max:100';
-        }
-        if (array_key_exists('breed_id', $data)){
-            $rules['breed_id'] = 'numeric|exists:breeds,id';
-        }
-        if (array_key_exists('gender', $data)){
-            $rules['gender'] = 'boolean';
-        }
-        if (array_key_exists('picture', $data)){
-            $rules['picture'] = 'url';
-        }
-        if (array_key_exists('dob', $data)){
-            $rules['dob'] = 'date_format:Y-m-d';
-        }
-        if (array_key_exists('color_id', $data)){
-            $rules['color_id'] = 'numeric|exists:colors,id';
-        }
-        if (array_key_exists('sterialized', $data)){
-            $rules['sterialized'] = 'boolean';
-        }
-        if (array_key_exists('status', $data)){
-            $rules['status'] = 'boolean';
-        }
-        if (array_key_exists('lunch_time', $data)){
-            $rules['lunch_time'] = 'date_format:H:i';
-        }
-        if (array_key_exists('friendly', $data)){
-            $rules['friendly'] = 'boolean';
-        }
-        if (array_key_exists('observations', $data)){
-            $rules['observations'] = 'string|min:5|max:255';
-        }
-        if (array_key_exists('user_id', $data)){
-            $rules['user_id'] = 'numeric|exists:users,id';
-        }
-
-        return Validator::make($data,
-            $rules
-        );    
     }
 
     /**

@@ -11,6 +11,8 @@ namespace App\Helpers;
 use App\Models\Dog;
 use App\Models\User;
 use App\Models\Response;
+use App\Repositories\DogRepository;
+use App\Service\UserService;
 use Illuminate\Support\Facades\Log;
 
 class DogValidator
@@ -18,14 +20,23 @@ class DogValidator
     /** @var Response */
     private $response;
 
+    /** @var UserService */
+    private $userService;
+
+    /** @var DogRepository */
+    private $dogRepository;
+
     /**
      * DogValidator constructor.
-     *
      * @param Response $response
+     * @param UserService $userService
+     * @param DogRepository $dogRepository
      */
-    public function __construct(Response $response)
+    public function __construct(Response $response, UserService $userService, DogRepository $dogRepository)
     {
         $this->response = $response;
+        $this->userService = $userService;
+        $this->dogRepository = $dogRepository;
     }
 
     /**
@@ -78,5 +89,29 @@ class DogValidator
         $dog = Dog::with('size:id,name')->find($dog_id);
 
         return !$dog ? $dog->size->id : null;
+    }
+
+    public function update( $dog_id, $user_id )
+    {
+
+        Log::info('Validator - Validating request to update dog...');
+        $exists = $this->exists($dog_id);
+        if(!$exists->getOk()) {
+            return $exists;
+        }
+
+        if ($this->dogRepository->get_by_id($dog_id)->getData()->user_id != $user_id){
+            $user = $this->userService->get_by_id($user_id)->getData();
+            if (!$user->hasRole('admin')) {
+                $this->response->setMessage('This dog does not belong to this user');
+                $this->response->setStatusCode(401);
+                $this->response->setOk(false);
+            } else {
+                $this->response->setOk(true);
+            }
+        }
+
+        return $this->response;
+
     }
 }

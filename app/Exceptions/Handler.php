@@ -62,9 +62,9 @@ class Handler extends ExceptionHandler
       if ($request->expectsJson()) {
         /** return response()->json(['error' => 'Unauthenticated.'], 401); */
         return Response::json(array(
-            'message' => 'the user has been created successfully',
-            'status_code' => 200,
-            'ok' => true
+            'message' => 'Unauthenticated.',
+            'status_code' => 401,
+            'ok' => false
         ), 200);
       }
       return redirect()->guest('login');

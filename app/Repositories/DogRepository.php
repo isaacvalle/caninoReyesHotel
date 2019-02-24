@@ -106,4 +106,25 @@ class DogRepository
         return $this->response;
     }
 
+    public function get_by_id($dog_id)
+    {
+        try {
+            $dog = Dog::find($dog_id);
+            if ($dog) {
+                $this->response->setOk(true);
+                $this->response->setData($dog);
+            } else {
+                $this->response->setMessage('Dog does not exits.');
+                $this->response->setOk(false);
+                $this->response->setStatusCode(404);
+            }
+        } catch (\Exception $e) {
+            Log::error('An exception was thrown while getting dog. Details: '.$e);
+            $this->response->setMessage('An exception was thrown while getting dog.');
+            $this->response->setOk(false);
+            $this->response->setStatusCode(500);
+        }
+
+        return $this->response;
+    }
 }

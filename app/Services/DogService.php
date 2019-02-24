@@ -8,6 +8,7 @@
 
 namespace App\Service;
 
+use App\Helpers\DogValidator;
 use App\Models\Response;
 use App\Repositories\DogRepository;
 use Illuminate\Support\Facades\Log;
@@ -20,15 +21,18 @@ class DogService
     /** @var DogRepository */
     private $dogRepository;
 
+    private $dogValidator;
+
     /**
      * DogService constructor.
      * @param UserService $userService
      * @param DogRepository $dogRepository
      */
-    public function __construct(UserService $userService, DogRepository $dogRepository)
+    public function __construct(UserService $userService, DogRepository $dogRepository, DogValidator $dogValidator)
     {
         $this->userService = $userService;
         $this->dogRepository = $dogRepository;
+        $this->dogValidator = $dogValidator;
     }
 
     /**
@@ -135,9 +139,36 @@ class DogService
 
     }
 
-    public function update()
+    public function update(array $dog, $dog_id, $user_id)
     {
+        Log::info('Service - Updating dog...');
 
+        $validator = $this->dogValidator->update($dog_id, $user_id);
+        if (!$validator->getOk()) {
+            return $validator;
+        }
+
+        $dog['updated_at'] = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+
+        $dog_to_update = $this->dogRepository->get_by_id($dog_id)->getData();
+        $dog_to_update->fill($dog);
+
+        $response = new Response();
+
+        $dog = $dog_to_update->save();
+        if ($dog) {
+            Log::info('Dog has been updated successfully.');
+            $response->setOk(true);
+            $response->setMessage('This puppy has been updated successfully.');
+            $response->setStatusCode(200);
+            $response->setData($dog);
+        } else {
+            $response->setOk(false);
+            $response->setMessage('Could not update this dog.');
+            $response->setStatusCode(500);
+        }
+
+        return $response;
     }
 
 }
