@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Breed;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Log;
+
 class BreedController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+  /**
+   * @param Request $request
+   * @return Breed[]|\Illuminate\Database\Eloquent\Collection
+   */
+    public function index(Request $request)
+    { 
+      Log::info('Controller - getting municipalities.');
+      return Breed::all('id', 'name');
     }
 
     /**

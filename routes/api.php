@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 })->middleware('verified');
 
 Route::group(['middleware' => 'auth:api'], function() {
-	Route::get('dogs', 'DogController@index')->middleware('verified');	
+	Route::get('dogs', 'DogController@index')->middleware('verified');
 	Route::post('dogs', 'DogController@store');
 	Route::get('dogs/{id}', 'DogController@show');
 	Route::put('dogs/{id}', 'DogController@update');
@@ -37,6 +37,8 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     Route::post('admin_register', 'UserController@register');
 });
 
+Route::get('municipalities', 'UserAddressController@index');
+Route::get('breeds', 'BreedController@index');
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');

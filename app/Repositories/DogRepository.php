@@ -35,7 +35,7 @@ class DogRepository
                 $dogs = Dog::all();
             } else {
                 //$dogs = Dog::where('user_id', '=', $user_id)->with('breed:id,name')->get();
-                $dogs = Dog::where('user_id', '=', $user_id);
+                $dogs = Dog::where('user_id', '=', $user_id)->get();
             }
 
             if($dogs){

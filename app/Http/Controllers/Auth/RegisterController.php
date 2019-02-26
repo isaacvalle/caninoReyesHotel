@@ -57,7 +57,7 @@ class RegisterController extends Controller
             'mobile' => ['required', 'string', 'max:15'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
-            'picture' => ['url'],
+            'picture' => ['string'],
         ]);
     }
 
@@ -102,7 +102,7 @@ class RegisterController extends Controller
             //    'status_code' => 200,
             //    'ok' => true
             //], 200);
-            
+
          } else {
             return Response::json(array(
                 'message' => 'Could not create new user.',
