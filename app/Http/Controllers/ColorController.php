@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Color;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Log;
+
 class ColorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+  /**
+   * @param Request $request
+   * @return Color[]|\Illuminate\Database\Eloquent\Collection
+   */
+    public function index(Request $request)
     {
-        //
+      Log::info('Controller - getting colors.');
+      return Color::all('id', 'color');
     }
 
     /**

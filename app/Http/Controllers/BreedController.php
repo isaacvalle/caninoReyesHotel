@@ -14,8 +14,8 @@ class BreedController extends Controller
    * @return Breed[]|\Illuminate\Database\Eloquent\Collection
    */
     public function index(Request $request)
-    { 
-      Log::info('Controller - getting municipalities.');
+    {
+      Log::info('Controller - getting breeds.');
       return Breed::all('id', 'name');
     }
 

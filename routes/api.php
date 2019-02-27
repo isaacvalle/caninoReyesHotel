@@ -37,8 +37,13 @@ Route::group(['middleware' => ['auth:api', 'role:admin']], function () {
     Route::post('admin_register', 'UserController@register');
 });
 
+/*Routes to fill DogTable*/
 Route::get('municipalities', 'UserAddressController@index');
 Route::get('breeds', 'BreedController@index');
+Route::get('colors', 'ColorController@index');
+Route::get('size-categories', 'SizeCategoryController@index');
+
+
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');

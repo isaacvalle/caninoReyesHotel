@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\SizeCategory;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Log;
+
 class SizeCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+  /**
+   * @param Request $request
+   * @return SizeCategory[]|\Illuminate\Database\Eloquent\Collection
+   */
+    public function index(Request $request)
     {
-        //
+      Log::info('Controller - getting zise-categories.');
+      return SizeCategory::all('id', 'name');
     }
 
     /**
