@@ -20,6 +20,7 @@ class ColorsTableSeeder extends Seeder
         for ($i = 0; $i < 15; $i++) {
         	Color::create([
         		'color' => $faker->colorName,
+            'code' => $faker->hexcolor
         	]);
         }
     }

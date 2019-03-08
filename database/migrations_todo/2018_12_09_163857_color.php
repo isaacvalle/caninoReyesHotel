@@ -17,6 +17,7 @@ class Color extends Migration
             $table->engine = 'InnoDB';
             $table->tinyIncrements('id');
             $table->string('color');
+            $table->string('code');
             $table->timestamps();
         });
     }
